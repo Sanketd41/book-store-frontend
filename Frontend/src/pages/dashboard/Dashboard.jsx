@@ -25,7 +25,15 @@ const Dashboard = () => {
                 setData(response.data);
                 setLoading(false);
             } catch (error) {
+                 if (
+                error.response &&
+                (error.response.status === 401 || error.response.status === 403)
+            ) {
+                localStorage.removeItem('token');
+                navigate("/admin");
+            } else {
                 console.error('Error:', error);
+            }
             }
         }
         

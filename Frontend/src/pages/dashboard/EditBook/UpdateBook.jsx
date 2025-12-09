@@ -60,8 +60,22 @@ const UpdateBook = () => {
       });
       await refetch()
     } catch (error) {
-      console.log("Failed to update book.");
-      alert("Failed to update book.");
+       Swal.fire({
+    title: "Failed to update book.",
+    text: "Your token may have expired or you are not authorized.",
+    icon: "error",
+    confirmButtonText: "OK"
+  }).then((result) => {
+    if (result.isConfirmed) {
+     if (
+        error.response &&
+        (error.response.status === 401 || error.response.status === 403)
+      ) {
+        localStorage.removeItem('token');
+      }
+      navigate("/admin");
+    }
+  });
     }
   }
   if (isLoading) return <Loading />
