@@ -4,7 +4,7 @@ console.log("Base URL:", getBaseUrl());
 
 
 const  baseQuery = fetchBaseQuery({
-    baseUrl: `${getBaseUrl()}/api`,
+    baseUrl: `${getBaseUrl()}/api/books`,
     credentials: 'include',
     prepareHeaders: (Headers) => {
         const token =  localStorage.getItem('token');
